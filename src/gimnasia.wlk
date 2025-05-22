@@ -114,7 +114,7 @@ class PersonaAtleta inherits Persona{
 
     
 class Club{
-    const predios 
+    const predios = #{}
 
     method elMejorPredioPara(persona){
         return predios.max({p => persona.caloriasGastadasEnRutinas(p.rutinasPredio())})
@@ -130,7 +130,7 @@ class Club{
 }
 
 class Predio{
-    const rutinasPredio 
+    const rutinasPredio = #{}
 
     method rutinasPredio() = rutinasPredio
 
@@ -142,6 +142,8 @@ class Predio{
        return  rutinasPredio.max({r => r.caloriasQueQuema(tiempo)})
     }
 }    
+
+
 
 
    

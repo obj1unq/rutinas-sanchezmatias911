@@ -19,9 +19,9 @@ describe "rutinas" {
 	//const recreo = //un predio con correrEnLaPlaya y maratonBA
 	const recreo = new Predio(rutinasPredio=[correrEnLaPlaya,maratonBA])
 	//const nautico = //un predio con remarEnElDelta y remarEnCaminoRemeros
-	const nautico = new Predio(rutinasPredio=#{remarEnElDelta,remarEnCaminoRemeros})
+	const nautica = new Predio(rutinasPredio=#{remarEnElDelta,remarEnCaminoRemeros})
 	//const clubBarrial = //un club con recreo y nautico
-	const clubBarrial = new Club(predios=#{recreo,nautico})
+	const clubBarrial = new Club(predios=#{recreo,nautica})
 //	
 //
 // PUNTO 1
