@@ -78,3 +78,19 @@ class PersonaSedentaria inherits Persona{
 
 }
 
+class PersonaAtleta inherits Persona{
+    override method cuantoPesoPierdo(rutina){
+        return super(rutina) - 1
+    }
+
+    override method kilosPorCaloriaQuePierde() = 8000
+
+    override method tiempoQueEntrena() = 90
+
+    override method aplicarRutina(rutina){
+        if(self.cuantoPesoPierdo(rutina)>10000){
+             peso -= self.cuantoPesoPierdo(rutina)
+        }
+    }
+}
+
