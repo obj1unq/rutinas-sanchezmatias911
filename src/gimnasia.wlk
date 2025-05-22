@@ -62,10 +62,6 @@ class Persona{
     method kilosPorCaloriaQuePierde()
 
     method tiempoQueEntrena()
-
-    
-   
-    
 }
 
 class PersonaSedentaria inherits Persona{
