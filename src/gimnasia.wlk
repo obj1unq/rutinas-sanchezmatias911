@@ -31,6 +31,7 @@ class Maraton inherits Running {
 }
 
 class Remo inherits Rutina{
+    
 
     override method intensidad() = 1.3
 
@@ -49,6 +50,7 @@ class RemoDeCompetision inherits Remo{
 
 class Persona{
     var property peso
+    const tiempo
 
     method cuantoPesoPierdo(rutina) {
         return rutina.caloriasQueQuema(self.tiempoQueEntrena()) / 
@@ -63,7 +65,7 @@ class Persona{
         
     method kilosPorCaloriaQuePierde()
     
-    method tiempoQueEntrena()
+    method tiempoQueEntrena() = tiempo
 
     method validarRutina(rutina){
         if(not self.puedoEntrenar(rutina)){
@@ -73,32 +75,48 @@ class Persona{
 
     method puedoEntrenar(rutina)
 
+    method tiempo() = tiempo
+
     
 }
 class PersonaSedentaria inherits Persona{
 
-    const  tiempo
+
     override method kilosPorCaloriaQuePierde() = 7000
 
-    override method tiempoQueEntrena() = tiempo
+   
 
     override method puedoEntrenar(rutina) = self.peso()>50
 }
 class PersonaAtleta inherits Persona{
+
+    
+    
     override method cuantoPesoPierdo(rutina){
         return super(rutina) - 1
     }
 
     override method kilosPorCaloriaQuePierde() = 8000
 
-    override method tiempoQueEntrena() = 90
+ 
 
-    override method puedoEntrenar(rutina) = self.cuantoPesoPierdo(rutina)>10000
+    override method puedoEntrenar(rutina) = rutina.caloriasQueQuema(self.tiempo())>10000
 }
 
     
+class Club{
+    const predios 
+
+    method elMejorPredioPara(persona){
+
+    }
+}
+
+class Predio{
+    const rutinas 
 
     
+}    
 
 
 
