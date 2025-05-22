@@ -12,6 +12,7 @@ class Rutina {
         return  100 * (tiempo - (self.descanso(tiempo))) * (self.intensidad())
     }
 }    
+ 
 
 class Running inherits Rutina{
     
@@ -50,7 +51,7 @@ class RemoDeCompetision inherits Remo{
 
 class Persona{
     var property peso
-    const tiempo
+    
 
     method cuantoPesoPierdo(rutina) {
         return rutina.caloriasQueQuema(self.tiempoQueEntrena()) / 
@@ -65,7 +66,7 @@ class Persona{
         
     method kilosPorCaloriaQuePierde()
     
-    method tiempoQueEntrena() = tiempo
+    method tiempoQueEntrena() 
 
     method validarRutina(rutina){
         if(not self.puedoEntrenar(rutina)){
@@ -75,16 +76,24 @@ class Persona{
 
     method puedoEntrenar(rutina)
 
-    method tiempo() = tiempo
+    //metodo para usar en club
+    method caloriasGastadasEnRutinas(setRutinas){
+        return setRutinas.sum({r=> self.cuantoPesoPierdo(r)})
+    }
+
+    method laRutinaEsTranqui(rutina){
+        return rutina.caloriasQueQuema(self.tiempoQueEntrena())<500
+    }
 
     
 }
 class PersonaSedentaria inherits Persona{
 
+    const tiempo
 
     override method kilosPorCaloriaQuePierde() = 7000
 
-   
+    override method tiempoQueEntrena() = tiempo
 
     override method puedoEntrenar(rutina) = self.peso()>50
 }
@@ -98,9 +107,9 @@ class PersonaAtleta inherits Persona{
 
     override method kilosPorCaloriaQuePierde() = 8000
 
- 
+    override method tiempoQueEntrena() = 90
 
-    override method puedoEntrenar(rutina) = rutina.caloriasQueQuema(self.tiempo())>10000
+    override method puedoEntrenar(rutina) = rutina.caloriasQueQuema(self.tiempoQueEntrena())>10000
 }
 
     
@@ -108,15 +117,40 @@ class Club{
     const predios 
 
     method elMejorPredioPara(persona){
+        return predios.max({p => persona.caloriasGastadasEnRutinas(p.rutinasPredio())})
+    }
+       
+    method prediosTranquis(persona){
+        return predios.filter({p=>p.tieneAlgunaRutinaTranqui(persona)})
+    }
 
+    method rutinasMasExigentes(persona){
+        return predios.map({p => p.rutinaMasExigente(persona.tiempoQueEntrena())}).asSet()
     }
 }
 
 class Predio{
-    const rutinas 
+    const rutinasPredio 
+
+    method rutinasPredio() = rutinasPredio
+
+    method tieneAlgunaRutinaTranqui(persona){
+        return rutinasPredio.any({r => persona.laRutinaEsTranqui(r)})
+    }
+
+    method rutinaMasExigente(tiempo){
+       return  rutinasPredio.max({r => r.caloriasQueQuema(tiempo)})
+    }
+}    
+
+
+   
 
     
-}    
+
+
+
+
 
 
 

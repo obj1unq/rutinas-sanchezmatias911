@@ -13,12 +13,15 @@ describe "rutinas" {
 	//const calamardo = //Una persona Sedentaria con peso 60 y tiempo de ejercicio 5
 	const calamardo = new PersonaSedentaria(peso=60,tiempo=5)
  	//const bob =  // Una persona atleta con peso 40 
-	const bob = new PersonaAtleta(peso = 40, tiempo=90)
+	const bob = new PersonaAtleta(peso = 40)
 
 //Punto 3: clubes
 	//const recreo = //un predio con correrEnLaPlaya y maratonBA
+	const recreo = new Predio(rutinasPredio=[correrEnLaPlaya,maratonBA])
 	//const nautico = //un predio con remarEnElDelta y remarEnCaminoRemeros
+	const nautico = new Predio(rutinasPredio=#{remarEnElDelta,remarEnCaminoRemeros})
 	//const clubBarrial = //un club con recreo y nautico
+	const clubBarrial = new Club(predios=#{recreo,nautico})
 //	
 //
 // PUNTO 1
@@ -122,21 +125,31 @@ describe "rutinas" {
 		bob.aplicarRutina(remarEnCaminoRemeros)
 		assert.equals(39.406,bob.peso().truncate(3))
 	}
-	/* 
+	
 //punto 3: Consultas
 	test "3.1 el mejor predio" {
 		//El mejor predio del clubBarrial para bob debería ser recreo		
 		//El mejor predio del clubBarrial para calamardo debería ser recreo		
+		assert.equals(recreo,clubBarrial.elMejorPredioPara(bob))
+		assert.equals(recreo,clubBarrial.elMejorPredioPara(calamardo))
+
 	}	
 	
 	test "3.2 predios tranquis" {
 		//No debería haber predios tranquis en el clubBarrial para bob
 		//Los predios tranquis del clubBarrial para calamardo solo incluyen a recreo  
+		assert.equals(#{},clubBarrial.prediosTranquis(bob))
+		assert.equals(#{recreo},clubBarrial.prediosTranquis(calamardo))
+		//assert.equals(1,bob.cuantoPesoPierdo())
+
 	}
 	
 	test "3.3 rutinas más exigentes" {
 		//Las rutinas más exigentes del clubBarrial para bob son maratonBA y remarEnCaminoRemeros
 		//Las rutinas más exigentes del clubBarrial para calamardo son maratonBA y remarEnElDelta
+		assert.equals(#{maratonBA,remarEnCaminoRemeros},clubBarrial.rutinasMasExigentes(bob))
+		assert.equals(#{maratonBA,remarEnElDelta},clubBarrial.rutinasMasExigentes(calamardo))
+
 	}
-	*/
+	
 }
