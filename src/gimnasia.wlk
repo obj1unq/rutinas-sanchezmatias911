@@ -56,25 +56,32 @@ class Persona{
     }
 
     method aplicarRutina(rutina)
+        
+    
 
     method kilosPorCaloriaQuePierde()
 
     method tiempoQueEntrena()
+
+    
+   
     
 }
 
 class PersonaSedentaria inherits Persona{
 
     const  tiempo
-     override method kilosPorCaloriaQuePierde() = 7000
+    override method kilosPorCaloriaQuePierde() = 7000
 
-     override method tiempoQueEntrena() = tiempo
+    override method tiempoQueEntrena() = tiempo
 
-     override  method aplicarRutina(rutina){
-        if(peso>50){
+    override  method aplicarRutina(rutina){
+        if(self.puedoEntrenar()){
             peso -= self.cuantoPesoPierdo(rutina)
         }
      }
+
+    method puedoEntrenar() = self.peso()>50
 
 }
 
@@ -88,9 +95,13 @@ class PersonaAtleta inherits Persona{
     override method tiempoQueEntrena() = 90
 
     override method aplicarRutina(rutina){
-        if(self.cuantoPesoPierdo(rutina)>10000){
+        if(self.puedoEntrenar(rutina)){
              peso -= self.cuantoPesoPierdo(rutina)
         }
     }
+
+     method puedoEntrenar(rutina) = self.cuantoPesoPierdo(rutina)>10000
 }
+
+
 
